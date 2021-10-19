@@ -1,0 +1,78 @@
+openapi: 3.0.1
+info:
+  title: Tarantool APP
+  description: |-
+    Пример нового тарантула
+  version: 0.0.1
+servers:
+- url: http://tarantoolapp.my-server.ru/api/v3
+paths:
+  /example:
+    post:
+      summary: example
+      requestBody:
+        $ref: '#/components/requestBodies/Example'
+      responses:
+        200:
+          $ref: '#/components/responses/SuccessCommon'
+        400:
+          $ref: '#/components/responses/BadRequest'
+        500:
+          $ref: '#/components/responses/Internal'
+components:
+  requestBodies:
+    Example:
+      description: example
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              say:
+                type: string
+                example: Hello
+  responses:
+    SuccessCommon:
+      description: Запрос успешно выполнен
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              response:
+                type: string
+                example: Hello
+    BadRequest:
+      description: |
+        Не удалось выполнить запрос:
+
+        | Ошибка               | Описание                         |
+        | ---                  | ---                              |
+        | `ARGUMENTS/REQUIRED` | обязательный параметр не передан |
+        | `ARGUMENTS/INVALID`  | передан неверный параметр        |
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          examples:
+            ARGUMENTS/REQUIRED:
+              value:
+                error: ARGUMENTS/REQUIRED
+            ARGUMENTS/INVALID:
+              value:
+                error: ARGUMENTS/INVALID
+    Internal:
+      description: Внутренняя ошибка сервера
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+          example:
+            error: INTERNAL
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string

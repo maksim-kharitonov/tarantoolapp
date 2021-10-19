@@ -1,0 +1,21 @@
+---
+common:
+  app: {}
+  box:
+    log_level: 5
+clusters:
+  tarantoolapp:
+    master: tarantoolapp_001
+    replicaset_uuid: b903abdf-ed7c-0000-0000-a48f8e3b8e4b
+instances:
+  tarantoolapp_001:
+    cluster: tarantoolapp
+    box:
+      listen: 127.0.11.11:3301
+      instance_uuid: b903abdf-ed7c-0001-0001-a48f8e3b8e4b
+  tarantoolapp_002:
+    cluster: tarantoolapp
+    box:
+      instance_uuid: b903abdf-ed7c-0001-0002-a48f8e3b8e4b
+      listen: 127.0.11.11:3302
+...

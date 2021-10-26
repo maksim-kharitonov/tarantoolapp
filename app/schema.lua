@@ -1,7 +1,7 @@
 -- 1. init spaces by creating migration
--- spacer.make_migration('init_spaces')
+-- spacer:makemigration('init_spaces')
 -- 2. apply migration by
--- spacer.migrate_up()
+-- spacer:migrate_up()
 spacer:space {
 	name = 'myspace',
 	format = {
